@@ -1,0 +1,1 @@
+export { defaolt } from './ImageGalleryItem';

@@ -23,13 +23,13 @@ class Modal extends Component {
   };
 
   render() {
+    const { largeImageURL, alt } = this.props;
     return createPortal(
       <div className="Overlay" onClick={this.handleOverlayClick}>
         <h1>Modal</h1>
 
         <div className="Modal">
-          {this.props.children}
-          <img src="" alt="" />
+          <img src={largeImageURL} alt={alt} />
         </div>
       </div>,
       modalRoot,
