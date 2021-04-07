@@ -16,10 +16,15 @@ class Modal extends Component {
       this.props.onClose();
     }
   };
+  handleOverlayClick = e => {
+    if (e.currentTarget === e.target) {
+      this.props.onClose();
+    }
+  };
 
   render() {
     return createPortal(
-      <div className="Overlay">
+      <div className="Overlay" onClick={this.handleOverlayClick}>
         <h1>Modal</h1>
 
         <div className="Modal">
