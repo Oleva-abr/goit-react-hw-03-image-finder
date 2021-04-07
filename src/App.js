@@ -4,7 +4,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-    showModal: false,
+    showModal: true,
   };
   toggleModal = () => {
     this.setState(({ showModal }) => ({
@@ -12,7 +12,7 @@ class App extends Component {
     }));
   };
   render() {
-    return <>{showModal && <Modal onClose={this.toggleModal} />}</>;
+    return this.state.showModal && <Modal onClose={this.toggleModal}></Modal>;
   }
 }
 
