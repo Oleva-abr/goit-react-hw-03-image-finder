@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -23,17 +24,19 @@ class Modal extends Component {
   };
 
   render() {
-    const { largeImageURL, alt } = this.props;
     return createPortal(
       <div className="Overlay" onClick={this.handleOverlayClick}>
         <h1>Modal</h1>
-
         <div className="Modal">
-          <img src={largeImageURL} alt={alt} />
+          <img src={this.props.largeImageURL} alt="" />
         </div>
       </div>,
       modalRoot,
     );
   }
 }
+Modal.protoTypes = {
+  largeImageURL: PropTypes.string.isRequired,
+  alt: PropTypes.string,
+};
 export default Modal;
