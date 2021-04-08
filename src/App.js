@@ -6,7 +6,7 @@ import ImageGallery from './components/ImageGallery';
 
 class App extends Component {
   state = {
-    // largeImageUrl: '',
+    results: [],
     showModal: false,
     images: [],
     name: '',
@@ -47,7 +47,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <ImageGallery images={results} onClick={this.openModal} />
+        <ImageGallery images={this.state.results} onClick={this.openModal} />
         {this.state.showModal && (
           <Modal largeImage={this.state.showModal} onClose={this.toggleModal} />
         )}
