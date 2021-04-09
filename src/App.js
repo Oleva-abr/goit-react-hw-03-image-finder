@@ -4,14 +4,18 @@ import './App.css';
 import ApiPixabay from './services/ApiPixabay';
 import ImageGallery from './components/ImageGallery';
 import Searchbar from './components/Searchbar';
+import Button from './components/Buton';
+import Spinner from './components/Spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 // console.log(ApiPixabay);
 class App extends Component {
   state = {
-    showModal: false,
+    isShowModal: false,
     hits: [],
     page: 1,
     query: '',
     img: '',
+    isLoading: false,
     // largeImage: '',
   };
 
@@ -26,12 +30,21 @@ class App extends Component {
   getDataApi = () => {
     const { query, page } = this.state;
     // console.log(query);
-    ApiPixabay.Api({ query, page }).then(hits => {
-      this.setState(prevState => ({
-        hits: [...prevState.hits, ...hits],
-        page: prevState.page + 1,
-      }));
-    });
+    ApiPixabay.Api({ query, page })
+      .then(hits => {
+        this.setState(prevState => ({
+          hits: [...prevState.hits, ...hits],
+          page: prevState.page + 1,
+        }));
+      })
+      .catch(error => this.setState({ error }))
+      .finally(() => {
+        this.setState({ isLoading: false });
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth',
+        });
+      });
   };
 
   handleSearch = query => {
@@ -54,11 +67,13 @@ class App extends Component {
   render() {
     // console.log(this.state.hits);
     // this.getDataApi('cat', 1);
-    const { isShowModal, hits } = this.state;
+    const { isLoading, isShowModal, hits } = this.state;
     return (
       <>
         <Searchbar onSubmit={this.handleSearch} />
         <ImageGallery hits={hits} onClick={this.openModal} />
+        {isLoading && <Spinner />}
+        {hits.length > 0 && !isLoading && <Button onClick={this.getDataApi} />}
         {isShowModal && (
           <Modal largeImage={this.openModal} onClose={this.toggleModal} />
         )}
