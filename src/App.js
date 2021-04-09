@@ -11,6 +11,8 @@ class App extends Component {
     hits: [],
     page: 1,
     query: '',
+    img: '',
+    // largeImage: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,20 +43,24 @@ class App extends Component {
   };
 
   toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
+    this.setState(({ isShowModal }) => ({
+      isShowModal: !isShowModal,
     }));
+  };
+  openModal = img => {
+    this.setState({ largeImage: img });
+    console.log(img);
   };
   render() {
     // console.log(this.state.hits);
     // this.getDataApi('cat', 1);
-    const { showModal, hits } = this.state;
+    const { isShowModal, hits } = this.state;
     return (
       <>
         <Searchbar onSubmit={this.handleSearch} />
-        <ImageGallery hits={hits} onClick={showModal} />
-        {showModal && (
-          <Modal largeImage={showModal} onClose={this.toggleModal} />
+        <ImageGallery hits={hits} onClick={this.openModal} />
+        {isShowModal && (
+          <Modal largeImage={this.openModal} onClose={this.toggleModal} />
         )}
       </>
     );
