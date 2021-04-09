@@ -9,10 +9,10 @@ class Spinner extends Component {
     return (
       <Loader
         className={style.Spinner}
-        type="TailSpin"
+        type="ThreeDots"
         color="#3f51b5"
-        height={100}
-        width={100}
+        height={120}
+        width={120}
         timeout={3000} //3 secs
       />
     );

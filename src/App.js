@@ -6,7 +6,7 @@ import ImageGallery from './components/ImageGallery';
 import Searchbar from './components/Searchbar';
 import Button from './components/Buton';
 import Spinner from './components/Spinner';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
 // console.log(ApiPixabay);
 class App extends Component {
   state = {
@@ -64,13 +64,15 @@ class App extends Component {
     this.setState({ largeImage: img });
     console.log(img);
   };
+
   render() {
     // console.log(this.state.hits);
     // this.getDataApi('cat', 1);
-    const { isLoading, isShowModal, hits } = this.state;
+    const { isShowModal, hits, isLoading } = this.state;
     return (
       <>
         <Searchbar onSubmit={this.handleSearch} />
+
         <ImageGallery hits={hits} onClick={this.openModal} />
         {isLoading && <Spinner />}
         {hits.length > 0 && !isLoading && <Button onClick={this.getDataApi} />}

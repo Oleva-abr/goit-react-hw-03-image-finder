@@ -1,3 +1,6 @@
-.spinner {
+.Spinner {
   margin: 0, auto;
+  position: absolute;
+  top: 49%;
+  left: 49%;
 }
