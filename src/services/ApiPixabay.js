@@ -2,13 +2,14 @@ import axios from 'axios';
 
 const API_KEY = '20710280-32e8ecf65799bd35d240b13ea';
 
-const ApiPixabay = ({ name = '', page = 1 }) => {
+const Api = ({ query = '', page = 1 }) => {
+  console.log(query);
   return axios
     .get(
-      `https://pixabay.com/api/?q=${name}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`,
+      `https://pixabay.com/api/?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`,
     )
 
     .then(res => res.data.hits);
 };
-// console.log(Api);
-export default ApiPixabay;
+
+export default { Api };

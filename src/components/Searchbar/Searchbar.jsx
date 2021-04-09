@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './searchbar.module.css';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 class Searchbar extends Component {
   state = {
@@ -12,10 +12,7 @@ class Searchbar extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.query.trim() === '') {
-      toast.error('This field cannot be empty');
-      return;
-    }
+
     this.props.onSubmit(this.state.query);
     this.setState({ query: '' });
   };
@@ -29,6 +26,7 @@ class Searchbar extends Component {
 
           <input
             className={style.SearchFormInput}
+            value={this.state.query}
             onChange={this.handleChange}
             type="text"
             autoComplete="off"

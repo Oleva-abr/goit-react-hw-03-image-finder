@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './imageGalleryItem.module.css';
+
 const ImageGalleryItem = ({ smallImage, largeImage, onClick }) => {
   return (
     <li className={styles.ImageGalleryItem}>

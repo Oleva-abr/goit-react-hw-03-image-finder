@@ -4,46 +4,40 @@ import './App.css';
 import ApiPixabay from './services/ApiPixabay';
 import ImageGallery from './components/ImageGallery';
 import Searchbar from './components/Searchbar';
-
+// console.log(ApiPixabay);
 class App extends Component {
   state = {
-    results: [],
     showModal: false,
     hits: [],
-    name: '',
     page: 1,
     query: '',
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const prevName = prevState.name;
-    const nextName = this.state.name;
+    const prevName = prevState.query;
+    const nextName = this.state.query;
     if (prevName !== nextName) {
       this.getDataApi();
+      // this.getDataApi('cat', 1);
     }
   }
   getDataApi = () => {
-    const { name, page } = this.state;
-    ApiPixabay(name, page).then(images => {
+    const { query, page } = this.state;
+    // console.log(query);
+    ApiPixabay.Api({ query, page }).then(hits => {
       this.setState(prevState => ({
-        images: [...prevState.images, ...images],
+        hits: [...prevState.hits, ...hits],
         page: prevState.page + 1,
       }));
     });
   };
 
-  //   // .catch(error => this.setState({ error }))
-  //   // .finally(() => {
-  //   //   this.setState({ isLoading: false });
-  //   //   window.scrollTo({
-  //   //     top: document.documentElement.scrollHeight,
-  //   //     behavior: 'smooth',
-  //   //   });
-  //   // });
-  // };
-
   handleSearch = query => {
-    this.setState({ query: query });
+    this.setState({
+      query: query,
+      page: 1,
+      hits: [],
+    });
   };
 
   toggleModal = () => {
@@ -52,17 +46,18 @@ class App extends Component {
     }));
   };
   render() {
-    const { results, showModal } = this.state;
+    // console.log(this.state.hits);
+    // this.getDataApi('cat', 1);
+    const { showModal, hits } = this.state;
     return (
       <>
         <Searchbar onSubmit={this.handleSearch} />
-        <ImageGallery hits={results} onClick={this.openModal} />
+        <ImageGallery hits={hits} onClick={showModal} />
         {showModal && (
           <Modal largeImage={showModal} onClose={this.toggleModal} />
         )}
       </>
     );
-    // this.state.showModal && <Modal onClose={this.toggleModal}></Modal>;
   }
 }
 
