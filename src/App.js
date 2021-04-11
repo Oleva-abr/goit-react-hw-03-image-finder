@@ -37,14 +37,16 @@ class App extends Component {
           page: prevState.page + 1,
         }));
       })
+      .then(this.scroll)
       .catch(error => this.setState({ error }))
-      .finally(() => {
-        this.setState({ isLoading: false });
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: 'smooth',
-        });
-      });
+      .finally(() => this.setState({ loading: false }));
+  };
+
+  scroll = () => {
+    return window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
   };
 
   handleSearch = query => {
@@ -61,7 +63,7 @@ class App extends Component {
     }));
   };
   openModal = img => {
-    this.setState({ largeImage: img });
+    this.setState({ isShowModal: true, largeImage: img });
     console.log(img);
   };
 
@@ -76,9 +78,7 @@ class App extends Component {
         <ImageGallery hits={hits} onClick={this.openModal} />
         {isLoading && <Spinner />}
         {hits.length > 0 && !isLoading && <Button onClick={this.getDataApi} />}
-        {isShowModal && (
-          <Modal largeImage={this.openModal} onClose={this.toggleModal} />
-        )}
+        {isShowModal && <Modal onClose={this.toggleModal} />}
       </>
     );
   }
