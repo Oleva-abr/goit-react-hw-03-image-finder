@@ -67,7 +67,7 @@ class App extends Component {
   };
   openModal = img => {
     this.setState({ isShowModal: true, largeImageUrl: img });
-    console.log(img);
+    // console.log(img);
   };
 
   render() {
