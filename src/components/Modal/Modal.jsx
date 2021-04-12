@@ -28,7 +28,7 @@ class Modal extends Component {
       <div className="Overlay" onClick={this.handleOverlayClick}>
         {/* <h1>Modal</h1> */}
         <div className="Modal">
-          <img src={this.props.largeImageURL} alt="" />
+          <img src={this.props.largeImageUrl} alt="" />
         </div>
       </div>,
       modalRoot,

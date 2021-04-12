@@ -3,7 +3,7 @@ import ImageGalleryItem from '../ImageGalleryItem';
 import PropTypes from 'prop-types';
 import style from './imageGallery.module.css';
 
-const ImageGallery = ({ hits, onClick }) => {
+const ImageGallery = ({ hits, onHandleClick }) => {
   return (
     <ul className={style.ImageGallery}>
       {hits.map(({ id, webformatURL, largeImageURL }) => (
@@ -11,7 +11,7 @@ const ImageGallery = ({ hits, onClick }) => {
           key={id}
           smallImage={webformatURL}
           largeImage={largeImageURL}
-          onClick={onClick}
+          onHandleClick={onHandleClick}
         />
       ))}
     </ul>

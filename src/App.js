@@ -15,16 +15,18 @@ class App extends Component {
     query: '',
     img: '',
     isLoading: false,
+    largeImageUrl: '',
     // largeImage: '',
   };
 
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
     const prevName = prevState.query;
     const nextName = this.state.query;
     if (prevName !== nextName) {
       // this.setState({ isLoading: true });
-      this.getDataApi();
+      await this.getDataApi();
     }
+    this.scroll();
   }
   getDataApi = () => {
     const { query, page } = this.state;
@@ -40,7 +42,6 @@ class App extends Component {
       .catch(error => this.setState({ error }))
       .finally(() => {
         this.setState({ isLoading: false });
-        this.scroll();
       });
   };
 
@@ -65,7 +66,7 @@ class App extends Component {
     }));
   };
   openModal = img => {
-    this.setState({ isShowModal: true, largeImage: img });
+    this.setState({ isShowModal: true, largeImageUrl: img });
     console.log(img);
   };
 
@@ -77,11 +78,15 @@ class App extends Component {
       <>
         <Searchbar onSubmit={this.handleSearch} />
 
-        <ImageGallery hits={hits} onClick={this.openModal} />
+        <ImageGallery hits={hits} onHandleClick={this.openModal} />
         {isLoading && <Spinner />}
         {hits.length > 0 && !isLoading && <Button onClick={this.getDataApi} />}
         {isShowModal && (
-          <Modal onClick={this.openModal} onClose={this.toggleModal} />
+          <Modal
+            onClick={this.openModal}
+            onClose={this.toggleModal}
+            largeImageUrl={this.state.largeImageUrl}
+          />
         )}
       </>
     );

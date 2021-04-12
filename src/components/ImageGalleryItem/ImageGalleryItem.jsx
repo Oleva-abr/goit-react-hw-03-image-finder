@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import styles from './imageGalleryItem.module.css';
 
-const ImageGalleryItem = ({ smallImage, largeImage, onClick }) => {
+const ImageGalleryItem = ({ smallImage, largeImage, onHandleClick }) => {
   return (
     <li className={styles.ImageGalleryItem}>
       <img
-        onClick={() => onClick(largeImage)}
+        onClick={() => onHandleClick(largeImage)}
         src={smallImage}
         alt=""
         className={styles.ImageGalleryItemImage}

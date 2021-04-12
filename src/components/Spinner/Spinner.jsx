@@ -13,7 +13,7 @@ class Spinner extends Component {
         color="#3f51b5"
         height={120}
         width={120}
-        timeout={3000} //3 secs
+        // timeout={3000} //3 secs
       />
     );
   }
