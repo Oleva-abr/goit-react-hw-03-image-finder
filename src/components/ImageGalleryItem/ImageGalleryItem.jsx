@@ -19,7 +19,7 @@ const ImageGalleryItem = ({ smallImage, largeImage, onHandleClick }) => {
 ImageGalleryItem.propTypes = {
   smallImage: PropTypes.string.isRequired,
   largeImage: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onHandleClick: PropTypes.func.isRequired,
 };
 
 export default ImageGalleryItem;
